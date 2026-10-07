@@ -43,9 +43,9 @@
     if (/Android/i.test(userAgent)) {
       status.textContent = "Version Android détectée.";
       if (androidBuildReady) {
-        download.href = "https://github.com/mt7562423-ai/shooter-game-site/releases/download/android-v1.0.0/Shooter.apk";
+        download.href = "https://github.com/mt7562423-ai/shooter-game-site/releases/download/android-v1.0.1/Shooter.apk";
         download.textContent = "Télécharger Shooter pour Android";
-        note.textContent = "APK de test (version debug), non testé sur téléphone. Ouvre le fichier téléchargé et confirme l’installation si Android te le demande.";
+        note.textContent = "APK de test (version debug), nouvel APK corrigé à tester sur téléphone. Ouvre le fichier téléchargé et confirme l’installation si Android te le demande.";
       } else {
         markUnavailable("Version Android en préparation");
         note.textContent = "Le fichier Android n’est pas encore disponible.";
