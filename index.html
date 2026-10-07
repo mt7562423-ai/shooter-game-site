@@ -42,6 +42,72 @@
 
     if (/Android/i.test(userAgent)) {
       status.textContent = "Version Android détectée.";
+      download.href = "https://github.com/mt7562423-ai/shooter-game-site/releases/download/android-v1.0.1/Shooter.apk";
+      download.textContent = "Télécharger Shooter pour Android";
+      note.textContent = "Version Android debug. Ouvre le fichier téléchargé et confirme l’installation si Android te le demande.";
+    } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
+      status.textContent = "Projet iOS détecté.";
+      download.href = "https://github.com/mt7562423-ai/shooter-game-site/releases/download/ios-source-v1.0.1/Shooter-iOS-project.zip";
+      download.removeAttribute("download");
+      download.textContent = "Télécharger le projet iOS";
+      note.textContent = "Archive du code source, pas une app installable sur iPhone. Un Mac avec Xcode et un compte Apple Developer sont nécessaires pour compiler et signer le jeu.";
+    } else if (/Windows/i.test(userAgent)) {
+      status.textContent = "Version Windows détectée.";
+      note.textContent = "Télécharge le fichier puis ouvre Shooter.exe pour jouer.";
+    } else if (/Macintosh|MacIntel|MacPPC|Mac68K/i.test(userAgent)) {
+      status.textContent = "Version Mac en préparation.";
+      markUnavailable("Version Mac non disponible");
+      note.textContent = "Le fichier Windows ne fonctionne pas sur Mac. Une version Mac installable n’est pas encore prête.";
+    } else {
+      status.textContent = "Choisis la version correspondant à ton appareil.";
+      note.textContent = "Android : APK debug. iPhone/iPad : projet source à compiler sur Mac avec Xcode. Windows : Shooter.exe.";
+    }
+  </script>
+</body>
+</html><!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#141722">
+  <title>Télécharger Shooter</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; background: #141722; color: #f6f7fb; }
+    body { box-sizing: border-box; display: grid; min-height: 100vh; margin: 0; padding: 24px; place-items: center; }
+    main { box-sizing: border-box; width: min(100%, 520px); padding: 32px; border: 1px solid #343949; border-radius: 20px; background: #202433; box-shadow: 0 20px 60px #0005; }
+    h1 { margin: 0 0 8px; }
+    p { color: #c5cada; line-height: 1.5; }
+    a { display: block; margin-top: 20px; padding: 15px 20px; border-radius: 12px; background: #ffb928; color: #241600; font-size: 1.1rem; font-weight: 750; text-align: center; text-decoration: none; }
+    a:focus-visible { outline: 3px solid white; outline-offset: 3px; }
+    #status { min-height: 3em; }
+    a.disabled { background: #4b5060; color: #e0e3eb; cursor: not-allowed; pointer-events: none; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Shooter</h1>
+    <p id="status">Détection de votre appareil…</p>
+    <a id="download" href="downloads/Shooter.exe" download>Télécharger Shooter pour Windows</a>
+    <p id="install-note"></p>
+    <noscript>Activez JavaScript pour détecter votre appareil et choisir la bonne version.</noscript>
+  </main>
+  <script>
+    const androidBuildReady = true;
+    const userAgent = `${navigator.userAgent} ${navigator.platform}`;
+    const status = document.querySelector("#status");
+    const download = document.querySelector("#download");
+    const note = document.querySelector("#install-note");
+
+    function markUnavailable(message) {
+      download.textContent = message;
+      download.removeAttribute("href");
+      download.removeAttribute("download");
+      download.classList.add("disabled");
+      download.setAttribute("aria-disabled", "true");
+    }
+
+    if (/Android/i.test(userAgent)) {
+      status.textContent = "Version Android détectée.";
       if (androidBuildReady) {
         download.href = "https://github.com/mt7562423-ai/shooter-game-site/releases/download/android-v1.0.1/Shooter.apk";
         download.textContent = "Télécharger Shooter pour Android";
