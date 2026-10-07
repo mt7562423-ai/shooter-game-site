@@ -26,7 +26,7 @@
     <noscript>Activez JavaScript pour détecter votre appareil et choisir la bonne version.</noscript>
   </main>
   <script>
-    const androidBuildReady = false;
+    const androidBuildReady = true;
     const userAgent = `${navigator.userAgent} ${navigator.platform}`;
     const status = document.querySelector("#status");
     const download = document.querySelector("#download");
@@ -43,9 +43,9 @@
     if (/Android/i.test(userAgent)) {
       status.textContent = "Version Android détectée.";
       if (androidBuildReady) {
-        download.href = "downloads/Shooter.apk";
+        download.href = "https://github.com/mt7562423-ai/shooter-game-site/releases/download/android-v1.0.0/Shooter.apk";
         download.textContent = "Télécharger Shooter pour Android";
-        note.textContent = "Après le téléchargement, confirme l’installation sur ton téléphone.";
+        note.textContent = "APK de test (version debug), non testé sur téléphone. Ouvre le fichier téléchargé et confirme l’installation si Android te le demande.";
       } else {
         markUnavailable("Version Android en préparation");
         note.textContent = "Le fichier Android n’est pas encore disponible.";
@@ -55,7 +55,11 @@
       note.textContent = "Télécharge le fichier puis ouvre Shooter.exe pour jouer.";
     } else {
       status.textContent = "Choisis la version correspondant à ton appareil.";
-      note.textContent = "La version Android est en préparation. L’installateur Windows est disponible ci-dessous.";
+      if (androidBuildReady) {
+        note.textContent = "La version Android est disponible sur les appareils compatibles. L’APK est une version debug.";
+      } else {
+        note.textContent = "La version Android est en préparation. L’installateur Windows est disponible ci-dessous.";
+      }
     }
   </script>
 </body>
